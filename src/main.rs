@@ -1,3 +1,11 @@
+mod config;
+mod servers;
+
 fn main() {
-    println!("Hello, world!");
+   match config::read_config("config.ini") {
+      Ok(config) => {
+         servers::start_server(config).unwrap()
+      },
+      Err(error) => println!("{}", error)
+   }
 }
